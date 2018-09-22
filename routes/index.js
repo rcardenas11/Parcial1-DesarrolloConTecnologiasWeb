@@ -11,7 +11,7 @@ function getDatos(callback){
 const url = 'mongodb://localhost:27017';
 
 // Database Name
-const dbName = 'myproject';  //poner el nombre de la base de datos
+const dbName = 'parcial1';  //poner el nombre de la base de datos
 
 // Use connect method to connect to the server
 MongoClient.connect(url, function(err, client) {
