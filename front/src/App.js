@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import vegaEmbed from 'vega-embed';
 import Papa from 'papaparse';
-
+import Historial from './Historial'
 import './App.css';
 
 class App extends Component {
@@ -28,7 +28,7 @@ class App extends Component {
         }
 
     };
-
+    this.arreglarCsv = this.arreglarCsv.bind(this);
     this.cargarSpecTextBox = this.cargarSpecTextBox.bind(this);
     this.cargarJsonTextBox = this.cargarJsonTextBox.bind(this);
     this.guardarGrafica = this.guardarGrafica.bind(this);
@@ -40,14 +40,39 @@ class App extends Component {
             const nombre = document.getElementById('nombreguardar').value;
             const timestamp = + new Date();
 
-            fetch('/postGrafica?nombre=' + nombre +'&rating=' + 0 + '&timestamp=' + timestamp + '&myData=' + JSON.stringify(this.state.datos) + '&spec=' + JSON.stringify(this.state.spec), {
+            fetch('/postGrafica?nombre=' + nombre +'&rating=' + 0 + '&timestamp=' + timestamp + '&datos=' + JSON.stringify(this.state.datos) + '&spec=' + JSON.stringify(this.state.spec), {
                 method: 'POST'
             }).then(console.log('done'));
             console.log('done');
             window.location.reload();
-            alert('Se agregó una nueva grafica');
+            alert('Se agregó una  grafica nueva');
         } catch (e) {
-            alert('Hubo un problema ingresando la grafia');
+            alert('Hubo un problema agregando la grafia');
+        }
+  }
+
+
+  arreglarCsv() {
+
+    try {
+      let a;
+      let t;
+      Papa.parse(this.archivoCSV.files[0], {
+        complete: function (results) {
+          a = results.data;
+          t = a.length;
+          for (let i = 0; i < t; i++) {
+            a[i].b = parseInt(a[i].b);
+          }
+          try {
+            this.setState({ datos: a });
+          } catch (e) {
+            console.log(e);
+          }
+        }.bind(this),
+        header: true
+      });
+    } catch (e) {
         }
   }
   
@@ -56,7 +81,7 @@ class App extends Component {
         this.setState({ spec: JSON.parse(this.divSPEC.value) });
         alert('Se cargó el Spec')
       } catch (e) {
-        alert('Hubo un problema cargando el spec');
+        alert('Hubo un problema cargando el Spec');
 
       }
     }
@@ -64,9 +89,9 @@ class App extends Component {
    cargarJsonTextBox(){
     try {
       this.setState({ datos: JSON.parse(this.divJSON.value) });
-      alert('Se cargó una visualización usando la entrada JSON')
+      alert('Se cargó el JSON')
     } catch (e) {
-      alert('Hubo un problema subiendo el  json');
+      alert('Hubo un problema subiendo el  JSON');
 
     }
    } 
@@ -88,7 +113,6 @@ class App extends Component {
         .catch(error => console.log(error))
         .then((res) => res.view.insert('datos', this.state.datos).run());
     } catch (e) {
-      alert('Hubo un problema renderizando el archivo');
     }
 
 
@@ -131,7 +155,7 @@ class App extends Component {
               Puedes subir un CSV: 
              <input className='inputtexto' ref={(inp) => this.archivoCSV = inp} type='file' id='file' name='file' multiple />
              <br /> 
-             <button type="button" class="btn btn-dark btn-sm">Subir</button>
+             <button type="button" class="btn btn-dark btn-sm" onClick={this.arreglarCsv}>Subir</button>
           </div>
           <div class="col-sm">
              <button type="button" class="btn btn-dark" onClick={this.cargarSpecTextBox}>Cargar Spec</button>  
@@ -149,7 +173,14 @@ class App extends Component {
       
       <br /> 
       <br />
+
+      <h2 class="headertekst"> Historial de Graficas </h2>
+      <Historial />
+      <br /> 
+      <br />
       </div>
+
+
     );
   }
 }
