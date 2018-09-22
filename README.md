@@ -43,10 +43,11 @@ Front-End:
 ```
 
 Encontrará la aplicación desplegada si en su browser se dirige a http://localhost:3000/
-
+# Notas
+- A la hora de ingres un Spec por favor colocar  el atributo name = datos. EJ: ...bar chart with embedded data.","data":{"name":"datos"}...
 
 # ScreenShot
-
+![Alt text](https://github.com/rcardenas11/Parcial1-DesarrolloConTecnologiasWeb/blob/master/public/images/capture.JPG?raw=true)
 Página del proyecto:
 # Licencia MIT
 
