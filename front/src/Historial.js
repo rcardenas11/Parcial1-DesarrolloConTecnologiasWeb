@@ -24,12 +24,12 @@ class Historial extends Component {
   }
   
   render() {
-   return (
+   return this.state.listaGraficas.map((obje, i) => (
      <div>
-     {this.state.listaGraficas.map((graf) => <Informacion nombre={graf.nombre} spec={graf.spec} datos={graf.datos}/>   )}
+     <Informacion nombre={obje.nombre} spec={obje.spec} datos={obje.datos}/> 
       
      </div>
-    );
+    ));
 
   }
   
