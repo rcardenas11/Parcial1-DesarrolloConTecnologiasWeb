@@ -42,14 +42,14 @@ class App extends Component {
             const nombre = document.getElementById('nombreguardar').value;
             const timestamp = + new Date();
 
-            fetch('/postVisual?nombre=' + nombre +'&rating=' + 0 + '&timestamp=' + timestamp + '&myData=' + JSON.stringify(this.state.datos) + '&spec=' + JSON.stringify(this.state.spec), {
+            fetch('/postGrafica?nombre=' + nombre +'&rating=' + 0 + '&timestamp=' + timestamp + '&myData=' + JSON.stringify(this.state.datos) + '&spec=' + JSON.stringify(this.state.spec), {
                 method: 'POST'
             }).then(console.log('done'));
             console.log('done');
             window.location.reload();
-            alert('Se agregó una nueva visualización');
+            alert('Se agregó una nueva grafica');
         } catch (e) {
-            alert('Hubo un problema ingresando la visualizacion');
+            alert('Hubo un problema ingresando la grafia');
         }
   }
   
