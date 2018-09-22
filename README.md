@@ -33,6 +33,7 @@ Front-End:
 > npm install
 ```
 4. Verifique que exista una carpeta llamada **node_modules** tanto en el directorio raíz  del proyecto como en el directorio  /front .
+5. Modifique el archivo package.json en el directorio principal y cambie la linea( "main": "index.js"), por  (private": true,)
 5. Vuelva nuevamente al directorio /front y ejecute el comando
 ```
 > npm start
