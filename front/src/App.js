@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import vegaEmbed from 'vega-embed';
 import Papa from 'papaparse';
-//import Grafica from './Grafica';
 
 import './App.css';
 
@@ -30,7 +29,6 @@ class App extends Component {
 
     };
 
-    this.cargarTextBoxs = this.cargarTextBoxs.bind(this);
     this.cargarSpecTextBox = this.cargarSpecTextBox.bind(this);
     this.cargarJsonTextBox = this.cargarJsonTextBox.bind(this);
     this.guardarGrafica = this.guardarGrafica.bind(this);
@@ -68,15 +66,12 @@ class App extends Component {
       this.setState({ datos: JSON.parse(this.divJSON.value) });
       alert('Se cargó una visualización usando la entrada JSON')
     } catch (e) {
-      alert('Hubo un problema subiendo el archivo json');
+      alert('Hubo un problema subiendo el  json');
 
     }
    } 
 
-   cargarTextBoxs(event) {
-    //  this.cargarSpecTextBox();
-      this.cargarJsonTextBox();
-   }
+ 
 
    componentDidUpdate() {
       try {
@@ -84,7 +79,6 @@ class App extends Component {
           .catch(error => console.log(error))
           .then((res) => res.view.insert('datos', this.state.datos).run());
       } catch (e) {
-        alert('Hubo un problema renderizando de nuevo la visualizacion');
       }
     }
 
